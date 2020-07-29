@@ -61,7 +61,7 @@ class GP:
 
 
 class GM:
-    """Short summary.
+    """ Generative Model.
 
     Attributes:
         pi_s (float): Precision of sensory probabilities.
