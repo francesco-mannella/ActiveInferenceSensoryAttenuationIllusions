@@ -6,9 +6,9 @@ import numpy as np
 from matplotlib import pyplot as plt
 import sympy as syp
 from sympy import init_printing, symbols, sqrt, \
-    exp, Inverse as inv, pi, log, re, Eq, diff
+    exp, Inverse as inv, pi, log, re, Eq, diff, function
 from sympy.matrices import Matrix, ones, zeros, eye
-init_printing(use_unicode=True, use_latex='mathjax')
+init_printing(use_unicode=True)
 
 
 # %%
@@ -61,15 +61,25 @@ display(F)
 
 # %%
 d_mux = Eq(-diff("F", mux, evaluate=False),
-           -diff(F, mux).simplify(), evaluate=False)
+           -syp.separatevars(diff(F, mux), force=True),
+           evaluate=False)
 display(d_mux)
+print(syp.latex(d_mux))
 
 # %%
 d_dmux = Eq(-diff("F", dmux, evaluate=False),
             -diff(F, dmux).simplify(), evaluate=False)
 display(d_dmux)
+print(syp.latex(d_dmux))
 
 # %%
-d_dmunu = Eq(-diff("F", munu, evaluate=False),
-             -diff(F, munu).simplify(), evaluate=False)
-display(d_dmunu)
+a = symbols("a", real=True)
+spa = syp.Function("s_p")(a)
+ssa = syp.Function("s_s")(a)
+F = F.subs(s[0], spa)
+F = F.subs(s[1], ssa)
+
+da = Eq(-diff("F", "a", evaluate=False),
+        -diff(F, a).simplify(), evaluate=False)
+display(da)
+print(syp.latex(da))
