@@ -1,4 +1,4 @@
-# Active Inference - Sensory Attenuation Illusions
+# Active Inference - Sensory Attenuation and Illusions
 
 
 Implementation of the model described in :
