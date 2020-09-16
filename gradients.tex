@@ -28,26 +28,24 @@
 $$
 \begin{array}{lll}
   - \frac{\partial F}{\partial \left[\begin{matrix}\mu_{x_i}
-\\\mu_{x_e}\end{matrix} \right]} &=& \left[\begin{matrix}- \frac{-
-  \mu_{\nu_i} h +  \mu_{x_i} h^{2} + d\mu_{x_i} h}{\sigma_x} - \frac{
-  \mu_{x_e} + 2 \mu_{x_i} -  s_{p} - s_{s}}{\sigma_s}\\ - \frac{- \mu_{\nu_e}
-  h +  \mu_{x_e} h^{2} + d\mu_{x_e} h}{\sigma_x} - \frac{ \mu_{x_e} +
-  \mu_{x_i} -  s_{s}}{\sigma_s} \end{matrix}\right] \\
+    \\\mu_{x_e}\end{matrix} \right]} &=& \left[\begin{matrix} -\frac{
+    h(d\mu_{x_i} - ( \mu_{\nu_i} - h \mu_{x_i}))}{\sigma_x} + \frac{(s_{p} +
+    s_{s}) - (\mu_{x_e} + 2 \mu_{x_i}) }{\sigma_s}\\ -\frac{ h(d\mu_{x_e} - (
+    \mu_{\nu_e} - h \mu_{x_e}))}{\sigma_x} + \frac{s_{s} - (\mu_{x_e} +
+    \mu_{x_i}) }{\sigma_s} \end{matrix}\right] \\
   %
-  - \frac{\partial F}{\partial \left[\begin{matrix}d\mu_{x_i}
-  \\d\mu_{x_e}\end{matrix}\right]} &=& \left[\begin{matrix}- \frac{ \left(-
-  \mu_{\nu_i} + \mu_{x_i} h + d\mu_{x_i}\right)} {\sigma_x}\\- \frac{ \left(-
-  \mu_{\nu_e} + \mu_{x_e} h + d\mu_{x_e}\right)}{\sigma_x} \end{matrix}
-  \right] \\
+  - \frac{\partial F}{\partial \left[\begin{matrix}d\mu_{x_i}\\
+    d\mu_{x_e}\end{matrix}\right]} &=& \left[\begin{matrix} -\frac{ d\mu_{x_i} -
+    ( \mu_{\nu_i} - h \mu_{x_i})}{\sigma_x} \\ -\frac{ d\mu_{x_e} - (
+    \mu_{\nu_e} - h \mu_{x_e})}{\sigma_x} \\ \end{matrix}\right] \\
   %
-- \frac{\partial F}{\partial a} &=& - \frac{- \mu_{x_e} \frac{\partial
-\operatorname{s_{s}}{\left(a \right)}}{\partial a} - \mu_{x_i} \frac{\partial
-\operatorname{s_{p}}{\left(a \right)}}{\partial a} - \mu_{x_i} \frac{\partial
-\operatorname{s_{s}}{\left(a \right)}}{\partial a} +
-\operatorname{s_{p}}{\left(a \right)} \frac{\partial
-\operatorname{s_{p}}{\left(a \right)}}{\partial a} +
-\operatorname{s_{s}}{\left(a \right)} \frac{\partial
-\operatorname{s_{s}}{\left(a \right)}}{\partial a}}{\sigma_s}
+- \frac{\partial F}{\partial a} &=& - \frac{
+  \frac{\partial\operatorname{s_{p}}{\left(a \right)}}{\partial a}\left(
+  \operatorname{s_{p}}{\left(a \right)} - \mu_{x_i} \right) +
+  \frac{\partial\operatorname{s_{s}}{\left(a \right)}}{\partial a}\left(
+  \operatorname{s_{s}}{\left(a \right)} - (\mu_{x_i} + \mu_{x_e}) \right)
+}
+{\sigma_s}
 \end{array}
 $$
 
