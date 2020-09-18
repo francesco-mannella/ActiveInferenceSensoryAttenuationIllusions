@@ -10,3 +10,4 @@ Implementation of the model described in :
 * ***[gradients.pdf](gradients.pdf)***: free energy gradients of generative model variables
 * ***[aisailib.py](aisailib.py)***: python implementation of generative process and generative model
 * ***[demo.py](demo.py)***: simulation with a given belief curve for the inner cause
+
