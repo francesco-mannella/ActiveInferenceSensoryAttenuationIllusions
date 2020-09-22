@@ -15,13 +15,28 @@ h = syp.Symbol("h", positive=True)
 
 # %% markdown
 
-# # Dynamics, its solution and derivative w.r.t. a
+# # Dynamics
+
+# The model latent variable has the following dynamics
+
 
 # %% cell
-display(syp.Eq(x.diff(t), n - h*x + a))
-f = syp.simplify(syp.dsolve(x.diff(t) - n + h*x - a, x))
+display(syp.Eq(x.diff(t), h*x + a))
+# %% markdown
+
+# # Solution
+
+# The solution of the equation above is given by:
+# %%
+f = syp.simplify(syp.dsolve(x.diff(t) + h*x - a, x))
 f = syp.expand(f)
 display(f)
+# %% markdown
+
+# # Derivative
+
+# We can now derivate with respect to $a$:
+# %%
 dlhs = syp.Derivative("x(a)", a, evaluate=False)
 drhs = syp.diff(f.rhs, a)
 display(syp.Eq(dlhs, drhs))

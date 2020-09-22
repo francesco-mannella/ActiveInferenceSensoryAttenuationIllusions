@@ -2,3 +2,4 @@
 .py_sources
 .tags
 .ipynb_checkpoints/**
+**/*.pyc
