@@ -128,7 +128,7 @@ class GM:
         self.pi_nu = 6
 
         self.h = 1.0/4.0
-        self.gamma = 6
+        self.gamma = 4
 
         self.mu_xi = 0
         self.mu_xe = 0
@@ -156,7 +156,7 @@ class GM:
          """
 
         # update sensory states and dynamic precision
-        self.sp, self.ss = sensory_states
+        self.mu_sp, self.mu_ss = sensory_states
         self.pi_s = self.pi_s_int - self.gamma*np.tanh(
             self.mu_xi + self.mu_nui)
         self.omega_s = np.exp(-self.pi_s)
@@ -167,7 +167,7 @@ class GM:
         self.dmu_xi = self.mu_nui - self.h*self.mu_xi
         self.dmu_xe = self.mu_nue - self.h*self.mu_xe
 
-        sp, ss = self.sp, self.ss
+        sp, ss = self.mu_sp, self.mu_ss
         os, ox = self.omega_s, self.omega_x
         mxi, mxe = self.mu_xi, self.mu_xe
         dmxi, dmxe = self.dmu_xi, self.dmu_xe
@@ -195,50 +195,7 @@ class GM:
         self.mu_xi += self.eta*self.gd_mu_xi
         self.mu_xe += self.eta*self.gd_mu_xe
 
-        self.spg = self.mu_xi
-        self.ssg = self.mu_xi + self.mu_xe
-        self.dxi = self.dmu_xi
-        self.dxe = self.dmu_xe
-        self.nui = self.mu_nui
-        self.nue = self.mu_nue
+        self.sp = self.mu_xi + np.sqrt(self.omega_s)*rng.randn()
+        self.ss = self.mu_xi + self.mu_xe + np.sqrt(self.omega_s)*rng.randn()
 
         return self.gd_a
-
-
-if __name__ == "__main__":
-
-    gp = GP()
-    gm = GM()
-
-    # %%
-    data = []
-
-    stime = 100000
-    t = np.arange(stime)
-    ta = skewgauss(n=stime, relative_location=0.5, alpha=4)
-    da = 0
-
-    plt.plot(ta)
-    # %%
-    for t in range(stime):
-        gm.mu_nui = ta[t]
-        gp.update(da)
-        gp.generate()
-        sp, ss = gp.sp, gp.ss
-        da = gm.update((sp, ss))
-        spg, ssg = gm.spg, gm.ssg
-        os = gm.omega_s
-        data.append((sp, ss, spg, ssg, os))
-
-    data = np.vstack(data)
-
-    # %%
-    sp, ss, spg, ssg, os = data.T
-
-    t = np.arange(len(ss))
-    plt.fill_between(t, ss - os, ss + os, color=[0.8, 0.8, 0.8])
-    p1, = plt.plot(t, sp, c='black', lw=1)
-    p2, = plt.plot(t, ss, c='black', lw=2)
-    p3, = plt.plot(t, spg, c='blue', lw=1)
-    p4, = plt.plot(t, ssg, c='blue', lw=2)
-    plt.legend([p1, p2, p3, p4], ['sp', 'ss', 'spg', 'ssg'])
